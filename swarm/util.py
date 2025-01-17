@@ -61,4 +61,7 @@ def load_chain_addresses(config: dict) -> dict:
     # Add fee recipient
     config['fee_recipient'] = addresses['fee_recipient']
 
+    # Add bsteth address
+    config['bsteth'] = addresses['bsteth']
+
     return config

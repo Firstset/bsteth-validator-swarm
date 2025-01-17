@@ -1,5 +1,6 @@
 from argparse import Namespace
 from .protocol.csm import CSM
+from .protocol.bsteth import Bsteth
 from .deposit import Deposit
 from .validator import Validator, RemoteSigner 
 from .exception import * 
@@ -28,6 +29,7 @@ async def deploy(config: dict, args : Namespace) -> None:
         validator = Validator(config)
         deposit = Deposit(config)
         csm = CSM(config)
+        bsteth = Bsteth(config)
     except Exception as e:
         sys.exit(f'{type(e)}: {e}')
 
@@ -58,6 +60,6 @@ async def deploy(config: dict, args : Namespace) -> None:
     try:
         # submit keys to protocol
         # await csm.submit_keys(deposit_data)
-        await csm.submit_keys_local_sign(deposit_data)
-    except CSMSubmissionException as e:
+        await bsteth.submit_keys_local_sign(deposit_data)
+    except BstethSubmissionException as e:
         sys.exit(f'Error: failed to submit keys into protocol {e}')
